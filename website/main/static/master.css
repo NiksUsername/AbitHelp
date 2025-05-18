@@ -83,3 +83,6 @@ background-color:rgba(34, 40, 49, 1);
 .btn-like{
      border:none;
  }
+.liked{
+    color:#CA2424;
+}
