@@ -22,12 +22,6 @@
                     </form>
                 </div>
             </div>
-            <div class="col align-content-center text-end">
-                <button type="button" class="btn btn-lg plus-btn" data-bs-toggle="modal"
-                        data-bs-target="#subscribeModal">
-                    <i class="bi fs-1 bi-plus-circle"></i>
-                </button>
-            </div>
         </div>
         <div class="mb-2 text-center">
             <button class="btn btn-news btn-news-active">
@@ -41,51 +35,36 @@
 
     <div class="news-sheet-container">
         <div class="news-sheet row  justify-content-center">
-            {% if page_obj %}
-                {% for news in page_obj %}
-                    <!-- оце новинка тупо -->
-                    <div class="col-lg-5 col-md-10 col-sm-10
-                                mx-lg-4  mx-md-0  mx-sm-0
-                    my-3 news-item">
-                        <div class="row news-content">
-                            <div class="col d-flex flex-column news-text">
-                                <div class="row news-title ">
-                                    <a class="ps-0" href="{{ news.id }}">
-                                        <h5 >{{ news }}</h5>
-                                    </a>
-                                </div>
-                                <div class="row mb-2 new-body">
-                                    <a class="ps-0" href="{{ news.id }}">{{ news.content|truncatewords:20 }}</a>
-                                </div>
-                                <div class="row mt-auto news-date">
-                                    {{ news.created_at }}
-                                </div>
+            {% for news in page_obj %}
+                <!-- оце новинка тупо -->
+                <div class="col-lg-5 col-md-10 col-sm-10
+                            mx-lg-4  mx-md-0  mx-sm-0
+                            my-3 news-item">
+                    <div class="row news-content">
+                        <div class="col d-flex flex-column news-text">
+                            <div class="row news-title ">
+                                <a class="ps-0" href="{{ news.id }}">
+                                    <h5 >{{ news }}</h5>
+                                </a>
                             </div>
-                            <div class="col d-flex flex-column text-end news-image-frame">
-                                <img class="news-image ms-auto my-auto" src="{{ news.image.url }}">
-                                <div class="btn ms-auto mt-auto">
-                                    <form action="{% url 'handle_like' news.id %}">
-                                        {% csrf_token %}
-                                        <button type="submit" style="background: none; border: none; padding: 0;">
-                                            {% if news.id in liked_event_ids %}
-                                                <i style="color: #CA2424" class="bi bi-heart-fill"></i>
-                                            {% else %}
-                                                <i style="color: white" class="bi bi-heart-fill"></i>
-                                            {% endif %}
-                                        </button>
-                                    </form>
-                                </div>
+                            <div class="row mb-2 new-body">
+                                <a class="ps-0" href="{{ news.id }}">{{ news.content|truncatewords:20 }}</a>
+                            </div>
+                            <div class="row mt-auto news-date">
+                                14.88.1488<br>
+                                14:88
                             </div>
                         </div>
+                        <div class="col d-flex flex-column text-end news-image-frame">
+                            <img class="news-image ms-auto my-auto" src="{{ news.image.url }}">
+                            <div class="btn btn-like ms-auto mt-auto"><i class="bi bi-heart-fill"></i></div>
+                        </div>
                     </div>
-                    <!-- кінець новинки тупо -->
-                {% endfor %}
-            {% else %}
-                Підпишіться на ресурс щоб побачити новини та події
-            {% endif %}
+                </div>
+                <!-- кінець новинки тупо -->
+            {% endfor %}
         </div>
     </div>
-    {% if page_obj.object_list %}
     <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
@@ -103,7 +82,6 @@
             {% endif %}
         </span>
     </div>
-    {% endif %}
 
     <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -112,47 +90,45 @@
                     <h5 class="modal-title" id="filterModalLabel">Діалог фільтрів пошуку</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
                 </div>
-                <form method="get" action="{% url 'index' %}">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="form-label">Часові межі</label>
-                            <div class="d-flex gap-2">
-                                <span class="align-self-center">З</span>
-                                <input name="date_from" type="text" class="form-control" placeholder="dd.mm.yyyy">
-                                <span class="align-self-center">До</span>
-                                <input name="date_to" type="text" class="form-control" placeholder="dd.mm.yyyy">
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Ресурс</label>
-                            <select class="form-select" name="resource">
-                                    <option value="" selected>Будь-який</option>
-                                {% for resource in resources %}
-                                    <option value="{{ resource.name }}">{{ resource.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Тільки новини які включають слова</label>
-                            <input name="must_include" type="text" class="form-control" placeholder="Value">
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Не включають жодного з слів</label>
-                            <input name="exclude" type="text" class="form-control" placeholder="Value">
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Включають будь яке з слів</label>
-                            <input name="include_any" type="text" class="form-control" placeholder="Value">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Часові межі</label>
+                        <div class="d-flex gap-2">
+                            <span class="align-self-center">З</span>
+                            <input type="text" class="form-control" placeholder="??.??.??">
+                            <span class="align-self-center">До</span>
+                            <input type="text" class="form-control" placeholder="??.??.??">
                         </div>
                     </div>
-                    <div class="modal-footer border-0">
-                        <button type="submit" class="btn w-100">Застосувати</button>
+
+                    <div class="mb-3">
+                        <label class="form-label">Ресурс</label>
+                        <select class="form-select">
+                            <option selected>Any</option>
+                            <option>Facebook</option>
+                            <option>Twitter</option>
+                            <option>Instagram</option>
+                        </select>
                     </div>
-                </form>
+
+                    <div class="mb-3">
+                        <label class="form-label">Тільки новини які включають слова</label>
+                        <input type="text" class="form-control" placeholder="Value">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Не включають жодного з слів</label>
+                        <input type="text" class="form-control" placeholder="Value">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Включають будь яке з слів</label>
+                        <input type="text" class="form-control" placeholder="Value">
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button class="btn w-100">Застосувати</button>
+                </div>
             </div>
         </div>
     </div>
@@ -166,29 +142,19 @@
         </div>
         <div class="modal-body">
             <div class="mb-3">
-                <select class="form-select" id="subscribe_resource">
-                    {% for resource in resources %}
-                        <option value="{{ resource.id }}">{{ resource.name }}</option>
-                    {% endfor %}
+                <select class="form-select">
+                    <option selected>Any</option>
+                    <option>Facebook</option>
+                    <option>Twitter</option>
+                    <option>Instagram</option>
                 </select>
             </div>
             <div class="mb-3">
                 <div class="modal-footer border-0">
-                    <button class="btn w-100" onclick="onSubscribeClick(event)">Підписатись</button>
-                    <a href="/subscribe/"></a>
+                    <button class="btn w-100">Підписатись</button>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
-{% block script %}
-<script>
-    function onSubscribeClick(e) {
-        const select = document.getElementById('subscribe_resource');
-        const selectedValue = select ? select.value : null;
-        if (selectedValue) {
-            window.location.href = `/subscribe/${encodeURIComponent(selectedValue)}`;
-        }
-    }
-</script>
-{% endblock %}
+{% block script %}{% endblock %}

@@ -6,7 +6,7 @@
 html, body {
     height: 100%;
     margin: 0;
-    background-image:url('./background.png');
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('./background.png');
     background-repeat: repeat;
     background-size: 30%;
 }
@@ -80,3 +80,6 @@ background-color:rgba(34, 40, 49, 1);
 .btn{
     color:white;
 }
+.btn-like{
+     border:none;
+ }
