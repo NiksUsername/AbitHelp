@@ -93,6 +93,7 @@
     border-color:#323444;
     background-color:transparent;
 }
+
 .cal-event-date-title::after {
     content: "";
     display: block;
