@@ -29,14 +29,6 @@
                 </button>
             </div>
         </div>
-        <div class="mb-2 text-center">
-            <button class="btn btn-news btn-news-active">
-                Підписки
-            </button>
-            <button class="btn btn-news">
-                Рекомендаціі
-            </button>
-        </div>
     </div>
 
     <div class="news-sheet-container">
@@ -63,7 +55,7 @@
                         </div>
                         <div class="col d-flex flex-column text-end news-image-frame">
                         {% if news.images %}
-                            <img class="news-image ms-auto my-auto" src="{{ news.images.url }}">
+                            <img class="news-image ms-auto my-auto" src="{{ img.url }}">
                         {% else %}
                             <img src="/media/events_images/default.jpg">
                         {% endif %}

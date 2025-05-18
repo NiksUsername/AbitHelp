@@ -61,4 +61,7 @@ h5{
      justify-content: center;
      text-align: center;
  }
-
+.plus-btn{
+    margin-left:auto;
+    border: 0;
+}
