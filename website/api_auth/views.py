@@ -16,7 +16,7 @@ def login(request):
     user = get_object_or_404(User, username=request.data["username"])
     if not user.check_password(request.data["password"]):
         return Response({"detail": "Not found"}, status=status.HTTP_404_NOT_FOUND)
-    
+
     token, _created = Token.objects.get_or_create(user=user)
 
     return Response({"token": token.key, "username": request.data["username"]})
