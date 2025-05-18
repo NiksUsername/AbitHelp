@@ -19,6 +19,7 @@
     background-color: #1C2027;
     border-radius: 20px;
     border: 4px solid #161A1FFF;
+    border-top-width: 4px;
     padding:2rem;
 }
 .news-item:hover {
